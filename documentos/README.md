@@ -64,41 +64,73 @@ git config --global user.name "generalvenenux"
 git config --global pull.rebase=true,
 ```
 
-#### Recompilando un paquete con abuild
+#### Recompilando un paquete con abuild que ya esta en el repo
+
+Esto es para cuando el paquete ya existe y lo quiere usar desde el repo
 
 ```bash
-mkdir -p /home/general/Devel/neofetch
-cd /home/general/Devel/neofetch
-aria2c https://git.alpinelinux.org/aports/plain/community/neofetch/APKBUILD
+mkdir -p /home/general/Devel/
+
+cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
+
+cd /home/general/Devel/alpine-apkbuilds/neofetch
+
 abuild -r
 ```
 
-> **NOTA** neofetch se usa como ejemplo pero es un paquete que ya existe, por eso el primer ejemplo funciona y el segundo fucionaria localmente
+> **NOTA** neofetch se usa como ejemplo si este es un paquete que ya existe en ESTE repositorio git
+
+Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
+
+#### Sacando un paquete desde Alpine con abuild y agregarlo al repo
+
+Esto es para cuando el paquete ya existe o u lo tiene local, y lo agrega al repo
+
+```bash
+mkdir -p /home/general/Devel/
+
+cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
+
+mkdir -p /home/general/Devel/alpine-apkbuilds/neofetch && cd /home/general/Devel/alpine-apkbuilds/neofetch
+
+aria2c https://git.alpinelinux.org/aports/plain/community/neofetch/APKBUILD
+
+abuild -r
+```
+
+> **NOTA** neofetch se usa como ejemplo pero es un paquete que ya existe en alpine y lo va agregar a el repo pero modificandolo
+
+Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
 
 #### Creando un paquete con abuild
 
+Esto es para cuando el paquete no existe o usted lo tiene local, y lo agregara al repo
+
 ```bash
-mkdir -p /home/general/Devel/neofetch
-cd /home/general/Devel/neofetch
+mkdir -p /home/general/Devel/
+
+cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
+
+mkdir -p /home/general/Devel/alpine-apkbuilds/neofetch && cd /home/general/Devel/alpine-apkbuilds/neofetch
+
 aria2c -o neofetch_7.0.1 https://github.com/dylanaraps/neofetch/archive/7.1.0.tar.gz
+
 newapkbuild -f -d "neofetch package" -n neofetch -l MIT neofetch-7.0.1 neofetch_7.1.0.tar.gz
+
 abuild -r
 ```
 
-> **NOTA** neofetch se usa como ejemplo pero es un paquete que ya existe, por eso el primer ejemplo funciona y el segundo fucionaria localmente
-
-#### usando este repositorio
-
-```bash
-mkdir -p /home/general/Devel
-cd /home/general/Devel
-git clone https://codeberg.org/alpine/alpine-apkbuilds
-cd /home/general/Devel/alpine-apkbuilds
-```
-
-Una vez realizado, entrar en el directorio deseado y recompilar o agregar el paquete que desee
+> **NOTA** neofetch se usa como ejemplo pero es un paquete que ya existe pero no esta aun empaquetado o se usara otro forma de empaquetar
 
 Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
+
+## Agregar paquetes
+
+Los paquetes se agregan en un branch llamado "main-contrib" en main solo los miembros del repo pueden agregar directamente
+
+hay 3 directorios, "base", "media" y "system", en el primero paquetes que son simples y no requieren dependencias tanto en ejecucion como en compilacion, 
+adicional alli van tambien paquetes que se necesitaran tanto en media como en system. En media va todo lo grafico, juegos y emuladores, 
+y en system va desarrollo, produccion y servicios.
 
 # mas informacion
 
