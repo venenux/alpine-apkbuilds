@@ -1,0 +1,3 @@
+- [APKbuilds](README.md)
+- [Guia](documentos/README.md)
+- [Codeberg](https://codeberg.org/alpine)
