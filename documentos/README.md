@@ -1,30 +1,37 @@
-Alpine linux es originalmente una distro para dispositivos de redes salida de LEAF linux.. 
-su simplicidad y rapidez (por ser simple) **ha gustado a sus usuarios y 
-estos empezaron meterle paquetes de todo tipo.. creyendola equivocamente en una todo uso**.
+# Como contribuir y usar este repositorio
 
-Esto le dara a ud **la razon de porque no ve muchos paquetes en main que otros tienen**, 
-es porque esta originalmente enfocado a servicios orientados a redes. Los paquetes 
-que no son de este enfoque estan "todos apiñados" en un repositorio llamado "community".
+Debe cunmplir con tes aspectos, los cuales se presentan en secciones:
 
-Una **pista de esto es ver que paquetes como `kamailio`, `asterisk`, `php` 
-esta muy al dia inclusive en versiones viejas como `3.6` y `3.7`.** Por ejemplo 
-`lua` esta tanto la version 5.1, como 5.2 y 5.3, y php esta 7.4 y 8.3 desde hace mucho 
-en los repositorios de alpine y si estan en comunidad mucho mas desde antes.
+## 1 - saber usar git y forks en codeberg
 
-## Comenzando con APKS y APKBUILDS
+El procedimiento es simple, debes tener como basico 3 cosas en tu linux, que 
+son el navegador web, el programa git y las utilidades de editor, ya que compilar 
+y probar el paquete no es necesario para agregar, corregir o quitar algo, pero 
+puede ser crucial si necesitas corroborar funcione (leer la segunda seccion).
 
-Este lugar asume ud ya sabe lo necesario, para informacion de como empezar visite la web 
-de la wiki alpine en https://venenux.github.io/alpine-espanol/#/recetas/alpine-recetas-hacer-paquetes-alpine-localmente 
+* Ve a Codeberg y tener una cuenta, sino registrate usando la de gitlab o github.
+* Al iniciar sesion, ve a nuestro repo https://codeberg.org/alpine/alpine-apkbuilds
+* Debes forkear nuestro repo https://codeberg.org/repo/fork/43677
+* Despues deber editar en la interfaz el archvo que deseas mejorar
+    * Opcionalmente puedes uan vez forkeado clonar con git el repo y editarlo en tu pc
+* Terminado de editar debes guardar en tu fork pero usando una nueva rama
+    * Si clonaste debes crear una rama nueva donde guardaras estos cambios
+* Despues de todo esto en tu fork se presentara un nuevo boton verde para enviar
+* Al pulsar el boton de "Pull Request", se enviara tu propuesta a nuestro repo.
+
+Despues debes esperar a que se coloquen comentarios en tu propuesta, para 
+correcciones. Para saber como operar con los empaquetamiento.. lee las secciones:
+
+## 2 - Anotaciones sobre APK y ABUILD
+
+Aunque se asume lo necesario se le resume aqui, pero para informacion mucho mas 
+emplia debe visite https://venenux.github.io/alpine-espanol/#/recetas/alpine-recetas-hacer-paquetes-alpine-localmente 
 o puede usar el repositorio de wiki https://codeberg.org/alpine/alpine-espanol/src/branch/master/recetas/alpine-recetas-hacer-paquetes-alpine-localmente.md
 
-ESte la dara una guia de como usar este repo, **los comandos funcionan 
-aun si su alpine tiene o no instalados paquetes, puede reejecutar estos 
-comandos sin problema**.
+### Configuracion entorno abuild
 
-#### Configuracion entorno abuild
-
-Cada linea es un comando que puede ejecutarse, cada dos lineas significa que 
-debe esperar a que termine el comando para ejecutar el siguente.
+Cada linea es un comando que puede ejecutarse, cada dos lineas en blanco significa 
+que debe esperar a que termine el comando para ejecutar el siguente.
 
 ```bash
 apk add shadow shadow-doc shadow-uidmap bash bash-doc bash-dev \
@@ -71,7 +78,7 @@ git config --global https.lowSpeedLimit 0
 git config --global https.lowSpeedTime 999999
 ```
 
-#### Recompilando un paquete con abuild que ya esta en el repo
+### Recompilando un paquete con abuild que ya esta en el repo
 
 Esto es para cuando el paquete ya existe y lo quiere usar desde el repo
 
@@ -80,7 +87,7 @@ mkdir -p /home/general/Devel/
 
 cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
 
-cd /home/general/Devel/alpine-apkbuilds/neofetch
+cd /home/general/Devel/alpine-apkbuilds/base/neofetch
 
 abuild -r
 ```
@@ -89,7 +96,7 @@ abuild -r
 
 Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
 
-#### Sacando un paquete desde Alpine con abuild y agregarlo al repo
+### Sacando un paquete desde Alpine con abuild y agregarlo al repo
 
 Esto es para cuando el paquete ya existe o u lo tiene local, y lo agrega al repo
 
@@ -98,7 +105,7 @@ mkdir -p /home/general/Devel/
 
 cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
 
-mkdir -p /home/general/Devel/alpine-apkbuilds/neofetch && cd /home/general/Devel/alpine-apkbuilds/neofetch
+mkdir -p /home/general/Devel/alpine-apkbuilds/base/neofetch && cd /home/general/Devel/alpine-apkbuilds/base/neofetch
 
 aria2c https://git.alpinelinux.org/aports/plain/community/neofetch/APKBUILD
 
@@ -109,7 +116,7 @@ abuild -r
 
 Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
 
-#### Creando un paquete con abuild
+### Creando un paquete con abuild
 
 Esto es para cuando el paquete no existe o usted lo tiene local, y lo agregara al repo
 
@@ -118,7 +125,7 @@ mkdir -p /home/general/Devel/
 
 cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
 
-mkdir -p /home/general/Devel/alpine-apkbuilds/neofetch && cd /home/general/Devel/alpine-apkbuilds/neofetch
+mkdir -p /home/general/Devel/alpine-apkbuilds/base/neofetch && cd /home/general/Devel/alpine-apkbuilds/base/neofetch
 
 aria2c -o neofetch_7.0.1 https://github.com/dylanaraps/neofetch/archive/7.1.0.tar.gz
 
@@ -131,18 +138,57 @@ abuild -r
 
 Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
 
-## Agregar paquetes
+## 3 - Como y donde agregar paquetes
 
-Los paquetes se agregan en un branch llamado "main-contrib" en main solo los miembros del repo pueden agregar directamente
+Si realizaste el procedimeinto descrito en el primer seccion de este documento, 
+ahora debes saber donde colocar tu paquete, y como hacerlo, el como hacerlo es 
+descrito en la segunda secion, todo lo previo a esta misma
 
-hay 3 directorios, "base", "media" y "system", en el primero paquetes que son simples y no requieren dependencias tanto en ejecucion como en compilacion, 
-adicional alli van tambien paquetes que se necesitaran tanto en media como en system. En media va todo lo grafico, juegos y emuladores, 
-y en system va desarrollo, produccion y servicios.
+Hay 3 directorios, los paquetes debe colocarlos segun funcionalidad y dependencias
+
+### base
+
+Colocar aqui si el paquete cumple con lo siguente:
+
+* **No tiene complicadas al ser instalados**, como `neofetch` una vez instalado 
+no necesita mas dependencias que `bash`, que tambien es un paquete base y al mismo 
+tiempo es un paquete que esta en alpine en sus repos oficiales desde siempre, en 
+cambio `minecraft` necesita al ser instalado varios componentes externos.
+* **No tiene compile depends mas que las mismas en main de alpine**, ejem `neofecth` 
+para compilar solo necesita `make`, que esta en main y no en comunity, pero en cambio
+el paquete `orc` no puede estar en base, porque no esta en main lo que necesita para 
+compilarse, sino en comunity.
+* **Es un paquete que es necesario para otros**, ojo con esto, si se necesita para
+compilar otro paquete en los otros directorios, pero no esta en alpine y cumple 
+con las dos anteriores previas. Sino debe ir a el directorio `system`.
+
+### system
+
+Las mismas condicines anteriores pero relajadas, con la salvedad que:
+
+* **Tiene mas dependencias que las que ya estan en alpine** por lo que las buscara 
+en el directorio "base" de nuestro repo.
+* **Es necesario o una dependencia para otros paquetes** por lo que sera necesario 
+que este incluido pero que como no cumple con las dependencias faciles o simples 
+se incluye aqui, ejemplos de esto es librerias.
+* **Es un paquete que se necesita para servidores o desarrollo** por ejemplo las 
+famosas php, apache2, nodejs etc
+
+### media
+
+Asumiremos que aqui se colocaran la mayoria ya que seran si:
+
+* **Es un paquete de juegos, video, audio, internet, educacion**, que por lo 
+mas general, no cumplira con las dos condiciones anteriores de los paquetes base, 
+por ejemplo telegram debe estar en este directorio si ud lo empaquetase.
+* **Es un paquete para un escritorio o interfaz grafica** como el escritorio 
+que fue removido `LXDE` o una aplicacion que alpine no quiere como `anydesk`.
 
 # mas informacion
 
-- Author
+- Authores
   - Sodomon as https://codeberg.org/alpine/alpine-espanol/src/branch/master/recetas/alpine-recetas-hacer-paquetes-alpine-localmente.md
+  - Mckaygerhard : ajustes y mejoras, correccion de comandos faltantes, paquetes faltants para no parir en la distro que siempre la falta algo
 
 Licencia CC-BY-SA-NC solo los autores de estos contenidos pueden permitir fuera de estas reglas de licencias.
 
