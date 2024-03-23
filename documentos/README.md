@@ -61,7 +61,14 @@ openssl genrsa -out /home/general/Devel/general@venenux.xxx.key.priv 2048
 openssl rsa -in /home/general/Devel/general@venenux.xxx.key.priv -pubout -out /etc/apk/keys/general@venenux.xxx.key.pub
 git config --global user.email "general@venenux.xxx"
 git config --global user.name "generalvenenux"
-git config --global pull.rebase=true,
+git config --global pull.rebase=true
+git config --global ssh.postBuffer 2000000000
+git config --global http.postBuffer 2000000000
+git config --global http.lowSpeedLimit 0
+git config --global http.lowSpeedTime 999999
+git config --global https.postBuffer 2000000000
+git config --global https.lowSpeedLimit 0
+git config --global https.lowSpeedTime 999999
 ```
 
 #### Recompilando un paquete con abuild que ya esta en el repo
