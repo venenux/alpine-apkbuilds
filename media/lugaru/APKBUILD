@@ -1,0 +1,35 @@
+# Maintainer: Díaz Urbaneja Diego <sodomon2@gmail.com>
+pkgname=lugaru
+pkgver=1.3
+_commit_ver=46111fb571e037ccb01228616fc1e0c02af97467
+pkgrel=0
+pkgdesc="Lugaru is a cross-platform third-person action game."
+url="https://osslugaru.gitlab.io/"
+arch="x86_64"
+license="GPL"
+depends="sdl2 glu libjpeg-turbo libpng openal-soft libogg libvorbis jsoncpp"
+makedepends="sdl2-dev glu-dev libjpeg-turbo-dev libpng-dev openal-soft-dev libogg-dev libvorbis-dev jsoncpp-dev"
+subpackages="$pkgname-doc"
+options="!check" # no check
+source="$pkgname-$pkgver.tar.gz::https://gitlab.com/osslugaru/$pkgname/-/archive/$_commit_ver/$pkgname-$_commit_ver.tar.gz"
+builddir="$srcdir/$pkgname-$_commit_ver"
+
+build() {
+	cmake -B build -G Ninja \
+		-DSYSTEM_INSTALL=ON \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_DATADIR=share \
+		-DCMAKE_INSTALL_BINDIR=bin \
+		-DCMAKE_INSTALL_MANDIR=share/man \
+		-Wno-dev
+	cmake --build build
+}
+
+package() {
+	DESTDIR="$pkgdir" cmake --install build
+}
+
+sha512sums="
+6725b8ee1b00ceb50b0168f952cf8c18e224f66cf23977ddb756faf710c683541db4090ba7af69686157add872b3ed5467d76fcd69bcae3a06755492133e4610  lugaru-1.3.tar.gz
+"
