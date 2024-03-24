@@ -69,7 +69,7 @@ doas sed -i 's|export CFLAGS\s*=.*|export CFLAGS="-O2"|g' /etc/abuild.conf
 doas sed -i 's|SRCDEST\s*=.*|SRCDEST=/var/cache/distfiles|g' /etc/abuild.conf
 doas mkdir -m 775 -p /home/general/Devel/packages
 doas chown general:abuild /home/general/Devel
-doas sed -i 's|PACKAGER\s*=.*|PACKAGER=\$HOME/Devel/packages/|g' /etc/abuild.conf
+doas sed -i 's|REPODEST\s*=.*|REPODEST=\$HOME/Devel/packages/|g' /etc/abuild.conf
 git config --global user.email "general@venenux.xxx"
 git config --global user.name "generalvenenux"
 doas sed -i 's|.*PACKAGER\s*=.*|PACKAGER="generalvenenux <general@venenux.xxx>"|g' /etc/abuild.conf
@@ -220,6 +220,10 @@ mas general, no cumplira con las dos condiciones anteriores de los paquetes base
 por ejemplo telegram debe estar en este directorio si ud lo empaquetase.
 * **Es un paquete para un escritorio o interfaz grafica** como el escritorio 
 que fue removido `LXDE` o una aplicacion que alpine no quiere como `anydesk`.
+
+### binarios compilados
+
+En esta guia se configura para que los encuentre en `/home/general/Devel/packages/`
 
 # mas informacion
 
