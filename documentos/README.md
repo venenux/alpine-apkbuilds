@@ -58,12 +58,15 @@ A partir de aquí todo se puede hacer en una cuenta de usuario normal, y las
 operaciones que requieren privilegios de superusuario se pueden hacer con `doas`.
 
 ```
-doas mkdir -p /var/cache/distfiles
-doas chmod a+w /var/cache/distfiles
+doas mkdir -m 775 -p /var/cache/distfiles
 doas chgrp abuild /var/cache/distfiles
-doas chmod g+w /var/cache/distfiles
+doas sed -i 's|export CFLAGS\s*=.*|export CFLAGS="-O2"|g' /etc/abuild.conf
+doas sed -i 's|.*USE_CCACHE\s*=.*|USE_CCACHE=1|g' /etc/abuild.conf
+doas sed -i 's|SRCDEST\s*=.*|SRCDEST=/var/cache/distfiles|g' /etc/abuild.conf
+doas mkdir -m 775 -p /home/general/Devel/packages
+doas chown general:abuild /home/general/Devel
+doas sed -i 's|REPODEST\s*=.*|REPODEST=\$HOME/Devel/packages|g' /etc/abuild.conf
 abuild-keygen -a -i
-mkdir /home/general/Devel
 openssl genrsa -out /home/general/Devel/general@venenux.xxx.key.priv 2048
 openssl rsa -in /home/general/Devel/general@venenux.xxx.key.priv -pubout -out /etc/apk/keys/general@venenux.xxx.key.pub
 git config --global user.email "general@venenux.xxx"
