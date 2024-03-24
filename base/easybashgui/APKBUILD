@@ -1,0 +1,24 @@
+# Contributor: generalvenenux <general@venenux.xxx>
+# Maintainer: generalvenenux <general@venenux.xxx>
+pkgname=easybashgui
+pkgver=13.0.0
+pkgrel=0
+pkgdesc="Posix compliant Bash functions library that aims to give unified GUI functions using frontends for dialogs boxeds, aims to give simple GUI functions using yad, gtkdialog, kdialog, zenity, Xdialog, (c)dialog, whiptail or bash builtins"
+url="http://bashgui.github.io/easybashgui/"
+arch="all"
+license="MIT"
+depends="bash dialog"
+makedepends="make"
+options="!check"
+checkdepends=""
+install=""
+subpackages="$pkgname-doc"
+source="$pkgname-$pkgver.tar.gz"
+
+package() {
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="
+c5f1fe881c97c9b1ea064e65db7c29a4a64606c57e634cfd1a35cc7c0c56afc3792db87a3ef37098435f8a1f44fda6d0ac657e01a9a877e1dd0e9eeb2b20eaa4  easybashgui-13.0.0.tar.gz
+"
