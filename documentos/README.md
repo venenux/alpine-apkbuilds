@@ -58,44 +58,46 @@ A partir de aquí todo se puede hacer en una cuenta de usuario normal, y las
 operaciones que requieren privilegios de superusuario se pueden hacer con `doas`.
 
 ```
-doas mkdir -m 775 -p /var/cache/distfiles
-doas chgrp abuild /var/cache/distfiles
-doas sed -i 's|export CFLAGS\s*=.*|export CFLAGS="-O2"|g' /etc/abuild.conf
-doas sed -i 's|.*USE_CCACHE\s*=.*|USE_CCACHE=1|g' /etc/abuild.conf
-doas sed -i 's|SRCDEST\s*=.*|SRCDEST=/var/cache/distfiles|g' /etc/abuild.conf
-doas mkdir -m 775 -p /home/general/Devel/packages
-doas chown general:abuild /home/general/Devel
-doas sed -i 's|REPODEST\s*=.*|REPODEST=\$HOME/Devel/packages|g' /etc/abuild.conf
-abuild-keygen -a -i
-openssl genrsa -out /home/general/Devel/general@venenux.xxx.key.priv 2048
-openssl rsa -in /home/general/Devel/general@venenux.xxx.key.priv -pubout -out /etc/apk/keys/general@venenux.xxx.key.pub
-git config --global user.email "general@venenux.xxx"
-git config --global user.name "generalvenenux"
+mkdir -m 775 -p /home/general/Devel
 git config --global pull.rebase=true
 git config --global ssh.postBuffer 2000000000
 git config --global http.postBuffer 2000000000
-git config --global http.lowSpeedLimit 0
-git config --global http.lowSpeedTime 999999
 git config --global https.postBuffer 2000000000
-git config --global https.lowSpeedLimit 0
-git config --global https.lowSpeedTime 999999
+doas mkdir -m 775 -p /var/cache/distfiles
+doas chgrp abuild /var/cache/distfiles
+doas sed -i 's|export CFLAGS\s*=.*|export CFLAGS="-O2"|g' /etc/abuild.conf
+doas sed -i 's|SRCDEST\s*=.*|SRCDEST=/var/cache/distfiles|g' /etc/abuild.conf
+doas mkdir -m 775 -p /home/general/Devel/packages
+doas chown general:abuild /home/general/Devel
+doas sed -i 's|PACKAGER\s*=.*|PACKAGER=\$HOME/Devel/packages/|g' /etc/abuild.conf
+git config --global user.email "general@venenux.xxx"
+git config --global user.name "generalvenenux"
+doas sed -i 's|.*PACKAGER\s*=.*|PACKAGER="generalvenenux <general@venenux.xxx>"|g' /etc/abuild.conf
+doas sed -i 's|.*MAINTAINER\s*=.*|MAINTAINER="\$PACKAGER"|g' /etc/abuild.conf
+abuild-keygen -a -i -n
 ```
+
+La secuencia de comandos es imprescindible en el mismo orden, asi el ultimo 
+comando ejecutara correctamente las llaves publica y privada. OJO depende de que 
+coloque bien su correo y usuario cambiando "general@venenux.xxx".
 
 ### Recompilando un paquete con abuild que ya esta en el repo
 
 Esto es para cuando el paquete ya existe y lo quiere usar desde el repo
 
 ```bash
-mkdir -p /home/general/Devel/
+mkdir -p /home/general/Devel/ && cd /home/general/Devel
 
-cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
+git clone https://codeberg.org/alpine/alpine-apkbuilds
 
 cd /home/general/Devel/alpine-apkbuilds/base/neofetch
+
+echo "aqui editar los archivos presentes y salvar"
 
 abuild -r
 ```
 
-> **NOTA** neofetch se usa como ejemplo si este es un paquete que ya existe en ESTE repositorio git
+> **NOTA** neofetch se usa como ejemplo SOLO SERVIRA SI YA TENEMOS ESTE PAQUETE EN EL GIT
 
 Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
 
@@ -104,40 +106,72 @@ Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar
 Esto es para cuando el paquete ya existe o u lo tiene local, y lo agrega al repo
 
 ```bash
-mkdir -p /home/general/Devel/
+mkdir -p /home/general/Devel/ && cd /home/general/Devel
 
-cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
+git clone https://codeberg.org/alpine/alpine-apkbuilds
 
 mkdir -p /home/general/Devel/alpine-apkbuilds/base/neofetch && cd /home/general/Devel/alpine-apkbuilds/base/neofetch
 
 aria2c https://git.alpinelinux.org/aports/plain/community/neofetch/APKBUILD
 
+echo "aqui editar los archivos presentes y salvar"
+
 abuild -r
 ```
 
-> **NOTA** neofetch se usa como ejemplo pero es un paquete que ya existe en alpine y lo va agregar a el repo pero modificandolo
+> **NOTA** neofetch se usa como ejemplo pero SI YA LO TENEMOS LE FALLARA ESTOS COMANDOS
 
 Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
 
-### Creando un paquete con abuild
+### Creando un paquete local con abuild
 
 Esto es para cuando el paquete no existe o usted lo tiene local, y lo agregara al repo
 
 ```bash
-mkdir -p /home/general/Devel/
+mkdir -p /home/general/Devel/ && cd /home/general/Devel
 
-cd /home/general/Devel/ && git clone https://codeberg.org/alpine/alpine-apkbuilds
+git clone https://codeberg.org/alpine/alpine-apkbuilds
 
-mkdir -p /home/general/Devel/alpine-apkbuilds/base/neofetch && cd /home/general/Devel/alpine-apkbuilds/base/neofetch
+cd /home/general/Devel/alpine-apkbuilds/base
 
-aria2c -o neofetch_7.0.1 https://github.com/dylanaraps/neofetch/archive/7.1.0.tar.gz
+newapkbuild -f -d "neofetch packages" -n neofetch -l MIT https://github.com/dylanaraps/neofetch/archive/7.1.0.tar.gz
 
-newapkbuild -f -d "neofetch package" -n neofetch -l MIT neofetch-7.0.1 neofetch_7.1.0.tar.gz
+cd /home/general/Devel/alpine-apkbuilds/base/neofetch
+echo "aqui debe editar mcuhos archivos para que funcione"
+
+aria2c -o neofetch-7.0.1 https://github.com/dylanaraps/neofetch/archive/7.1.0.tar.gz
+
+abuild checksum
 
 abuild -r
 ```
 
-> **NOTA** neofetch se usa como ejemplo pero es un paquete que ya existe pero no esta aun empaquetado o se usara otro forma de empaquetar
+> **NOTA** neofetch se usa como ejemplo PERO SOLO SERVIRA SI NO TENEMOS ESTE PAQUETE EN EL REPO
+
+Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
+
+### Creando un paquete directo internet con abuild
+
+Esto es para cuando el paquete lo toma directo desde internet, y lo agregara al repo
+
+```bash
+mkdir -p /home/general/Devel/ && cd /home/general/Devel
+
+git clone https://codeberg.org/alpine/alpine-apkbuilds
+
+cd /home/general/Devel/alpine-apkbuilds/base
+
+newapkbuild -f -d "neofetch packages" -n neofetch -l MIT https://github.com/dylanaraps/neofetch/archive/7.1.0.tar.gz
+
+cd /home/general/Devel/alpine-apkbuilds/base/neofetch
+echo "aqui debe editar mcuhos archivos para que funcione"
+
+abuild checksum
+
+abuild -r
+```
+
+> **NOTA** neofetch se usa como ejemplo PERO SOLO SERVIRA SI NO TENEMOS ESTE PAQUETE EN EL REPO
 
 Una vez esto, crear un branch y subir a otro repo igual forkeado, despues enviar un pull request
 
