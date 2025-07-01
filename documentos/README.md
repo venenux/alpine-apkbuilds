@@ -2,6 +2,8 @@
 
 Debe cunmplir con tes aspectos, los cuales se presentan en secciones:
 
+Este documento esta inspirado en https://sodomon.gitlab.io/post/guia-abuild/ Realizado por @sodomon 
+
 ## 1 - saber usar git y forks en codeberg
 
 El procedimiento es simple, debes tener como basico 3 cosas en tu linux, que 
@@ -236,3 +238,4 @@ Licencia CC-BY-SA-NC solo los autores de estos contenidos pueden permitir fuera 
 # Vease tambien
 
 * Indice general [../README.md](../README.md)
+Este documento esta inspirado en https://sodomon.gitlab.io/post/guia-abuild/ Realizado por @sodomon 
