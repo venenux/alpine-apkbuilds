@@ -8,7 +8,14 @@ Si detecta algun error en los APKBUILD por favor avisar en los [Issues](https://
 
 Si deseas contribuir.. o como usar este repo favor leer [../documentos/README.md](../documentos/README.md)
 
-### Que hay en este directorio
+## Listado de paquetes
+
+| nombre fuente  | paquetes generados | fuentes y APKBUILD |
+| ---------------------------- | ----------------------------- | ------------------------------------------- |
+| easybashgui                  | easybashgui                   | [easybashgui](easybashgui)                  |
+| linux-zen                    | linux-zen linux-zen-dev etc   | [linux-zen](linux-zen)                      |
+
+## Pre requisitos para que los paquetes esten aqui
 
 Aqui se colocan las recetas o `APKBUILD`S para paquetes comunmente que:
 
@@ -28,10 +35,11 @@ Si deseas contribuir.. o como usar este repo favor leer [../documentos/README.md
 
 ### Donde consiguo los paquetes listo para instalar?
 
-Los resultados de las recetas se estara subiendo a github, si vamos a llenarles 
-a maycosoft su trasero y que consumamos gratis sus productos.
+Los resultados de las recetas se estara subiendo a github (para consumirles a 
+ellos y no darle carga a codeberg/gitlab), si! vamos a llenarles a maycosoft 
+su trasero y que consumamos gratis sus productos.
 
-TODO
+Revisa [../README.md](../README.md) para como usar nuestros repos
 
 ### Contactos
 

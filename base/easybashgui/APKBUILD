@@ -1,15 +1,28 @@
+# Contributor: mckayshirou <mckayshirou@gmail.com>
+# Maintainer: PICCORO Lenz McKay <mckaygerhard@gmail.com>
+# Copyright (c) 2024 PICCORO Lenz McKAY <mckaygerhard>.
+#
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
+# Please submit bugfixes or comments via https://github.com/BashGui/easybashgui/issues
+
 pkgname=easybashgui
 pkgver=13.0.0
 pkgrel=0
-pkgdesc="aims to give simple GUI functions using yad, gtkdialog, kdialog, zenity, Xdialog, (c)dialog, whiptail or bash builtins"
+pkgdesc="Simplified way to code bash made GUI frontend dialogs!"
+options="!check"
 url="http://bashgui.github.io/easybashgui/"
 arch="noarch"
-license="MIT"
+license="BSD-3-Clause"
 depends="bash dialog"
 makedepends="make"
-options="!check"
-checkdepends=""
-install=""
 subpackages="$pkgname-doc"
 source="$pkgname-$pkgver.tar.gz::https://github.com/BashGui/easybashgui/archive/$pkgver.tar.gz"
 
@@ -18,5 +31,5 @@ package() {
 }
 
 sha512sums="
-c5f1fe881c97c9b1ea064e65db7c29a4a64606c57e634cfd1a35cc7c0c56afc3792db87a3ef37098435f8a1f44fda6d0ac657e01a9a877e1dd0e9eeb2b20eaa4  easybashgui-13.0.0.tar.gz
+c5aa38f80c526f579827e43578d73001f2662716f761fc3fbaf017602fa8f0e5  easybashgui-13.0.0.tar.gz
 "
