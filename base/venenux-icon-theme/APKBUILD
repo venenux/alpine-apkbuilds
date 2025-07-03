@@ -1,0 +1,18 @@
+# Maintainer: PICCORO Lenz McKAY <mckaygerhard@gmail.com>
+# Contributor: mckayshirou <mckayshirou@gmail.com>
+pkgname=venenux-icon-theme
+pkgver=0.1.1
+pkgrel=0
+pkgdesc="VenenuX Flat minimal and fork from pixelitus icon theme"
+options="!check" # It is an icon theme
+url="https://codeberg.org/itamarperdomo/venenux-icon-theme"
+arch="noarch"
+license="GPL-3.0-or-later"
+source="$pkgname-$pkgver.tar.gz"
+
+depends="gtk-update-icon-cache hicolor-icon-theme"
+
+package() {
+	mkdir -p "$pkgdir"
+	PREFIX=/usr DESTDIR="$pkgdir" ./install.sh
+}

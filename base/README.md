@@ -13,6 +13,7 @@ Si deseas contribuir.. o como usar este repo favor leer [../documentos/README.md
 | nombre fuente  | paquetes generados | fuentes y APKBUILD |
 | ---------------------------- | ----------------------------- | ------------------------------------------- |
 | easybashgui                  | easybashgui                   | [easybashgui](easybashgui)                  |
+| venenux-icon-theme           | venenux-icon-theme            | [venenux-icon-theme](venenux-icon-theme)    |
 | linux-zen                    | linux-zen linux-zen-dev etc   | [linux-zen](linux-zen)                      |
 
 ## Pre requisitos para que los paquetes esten aqui
