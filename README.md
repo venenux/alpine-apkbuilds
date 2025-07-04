@@ -10,7 +10,7 @@ tambien incluso **paquetes mejorados o superiores**
 
 Si detecta algun error en los APKBUILD por favor avisar en los [Issues](https://codeberg.org/alpine/alpine-apkbuilds/issues) 
 
-Si deseas contribuir.. o como usar este repo favor leer [documentos/README.md](documentos/README.md)
+Si deseas contribuir.. o como usar este repo favor leer [docs/README.md](docs/README.md)
 
 Si desea usar los archivo APKBUILD y las fuentes favor leer la [licencia abajo](#license)
 
