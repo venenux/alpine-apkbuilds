@@ -2,7 +2,7 @@
 
 ![Alpine linux logo](https://alpinelinux.org/alpinelinux-logo.svg)
 
-Es un repositorio de `APKBUILD` (recetas) para hacer paquetes para [Alpine linux](https://alpinelinux.org/)
+Es un repositorio de `APKBUILD` (recetas) para **Alpine linux** y **Alpaquita Linux**
 tambien para configurar `abuild` para que puedas crear los paquetes a partir de 
 los `APKBUILD` que aqui mostramos. **Contiene paquetes que no estan** en alpine 
 o quiza nunca estaran, **aparte paquetes para versiones viejas de alpine**, 
@@ -25,7 +25,7 @@ que no son de este enfoque estan "todos apiñados" en un repositorio llamado "co
 ### Porque tienen las recetas aqui?
 
 Una **pista de esto es ver que paquetes como `kamailio`, `asterisk`, `php` 
-esta muy al dia inclusive en versiones viejas como `3.6` y `3.7`.** Por ejemplo 
+esta muy al dia inclusive en versiones viejas como `3.14` y `3.10`.** Por ejemplo 
 `lua` esta tanto la version 5.1, como 5.2 y 5.3, y php esta 7.4 y 8.3 desde hace mucho 
 en los repositorios de alpine y si estan en comunidad mucho mas desde antes.
 
@@ -45,9 +45,19 @@ de alpine, por ejemplo la mejor version de alpine para i386 es la 3.12.
 
 Hay 3 directorios, los paquetes debe colocarlos segun funcionalidad y dependencias
 
+| nombre       | informacion        | fuentes y APKBUILD                   |
+| ------------ | ------------------ | ------------------------------------ |
+| base         | [#base](#base)     | [base/README.md](base/README.md)     |
+| system       | [#system](#system) | [system/README.md](system/README.md) |
+| media        | [#media](#media)   | [media/README.md](media/README.md)   |
+
+> **Warning**: las fuentes solo se subiran si estas tienen sospechas o peligro de desaparecer, caso contrario se usara igual que en alpine oficial, la url del repo oficial para descarga.
+
+> **Note**: actualmente se piensa usar un sistema de auto construccion con docker y gastarle los recursos a mocosoft, pero preferimos tambien hacerlo compatible con OBS Open Suse Build service.
+
 ### base
 
-Colocar aqui si el paquete cumple con lo siguente:
+Colocar [en base/](base/) si el paquete cumple con lo siguente:
 
 * **No tiene complicadas al ser instalados**, como `neofetch` una vez instalado 
 no necesita mas dependencias que `bash`, que tambien es un paquete base y al mismo 
@@ -60,6 +70,8 @@ compilarse, sino en comunity.
 * **Es un paquete que es necesario para otros**, ojo con esto, si se necesita para
 compilar otro paquete en los otros directorios, pero no esta en alpine y cumple 
 con las dos anteriores previas. Sino debe ir a el directorio `system`.
+
+Para mas informacion revise [base/README.md](base/README.md)
 
 ### system
 
