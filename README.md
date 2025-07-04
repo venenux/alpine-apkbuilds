@@ -12,6 +12,8 @@ Si detecta algun error en los APKBUILD por favor avisar en los [Issues](https://
 
 Si deseas contribuir.. o como usar este repo favor leer [documentos/README.md](documentos/README.md)
 
+Si desea usar los archivo APKBUILD y las fuentes favor leer la [licencia abajo](#license)
+
 ## Acerca Alpine linux
 
 Alpine linux es originalmente una distro para dispositivos de redes salida 
@@ -100,11 +102,19 @@ que fue removido `LXDE` o una aplicacion que alpine no quiere como `anydesk`.
 Los resultados de las recetas se estara subiendo a github, si vamos a llenarles 
 a maycosoft su trasero y que consumamos gratis sus productos.
 
-TODO
+## LICENSE
+
+Los APKBUILD todos aqui tienen esta licencia de notificacion previa a su uso, la 
+CC BY-SA-NC Esta licencia exige que se reconozca al autor original al usar, distribuir, 
+adaptar o crear obras derivadas, incluyendo usos comerciales.
+
+Esta licencia no aplica a los paquetes subidos, cada paquete tiene su propia licencia, 
+entonces si alguien quiere usar los archivos APKBUILD debera notificar primero 
+abriendo un issue en este repo en codeberg en los [Issues](https://codeberg.org/alpine/alpine-apkbuilds/issues) 
 
 ### Contactos
 
-- 📱 Telegram https://t.me/alpine_linux
+- Telegram https://t.me/alpine_linux
   - 🇨🇴 https://t.me/alpine_linux_espanol
   - 📡 https://t.me/latam_programadores
 - Matrix
