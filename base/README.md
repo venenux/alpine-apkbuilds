@@ -12,6 +12,7 @@ Si deseas contribuir.. o como usar este repo favor leer [../documentos/README.md
 
 | nombre fuente  | paquetes generados | fuentes y APKBUILD |
 | ---------------------------- | ----------------------------- | ------------------------------------------- |
+| doas-sudo-shim               | doas-sudo-shim                | [doas-sudo-shim](doas-sudo-shim)            |
 | easybashgui                  | easybashgui                   | [easybashgui](easybashgui)                  |
 | venenux-icon-theme           | venenux-icon-theme            | [venenux-icon-theme](venenux-icon-theme)    |
 | linux-zen                    | linux-zen linux-zen-dev etc   | [linux-zen](linux-zen)                      |

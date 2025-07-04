@@ -1,0 +1,26 @@
+pkgname=doas-sudo-shim
+pkgver=0.1.2.1
+pkgrel=0
+pkgdesc="A shim for the sudo command that utilizes doas"
+url="https://github.com/jirutka/doas-sudo-shim"
+arch="noarch"
+license="ISC"
+depends="doas"
+makedepends="asciidoctor doas"
+subpackages="$pkgname-doc"
+source="doas-sudo-shim.orig.tar.gz"
+options="!check"  # no tests provided
+
+build() {
+	make man
+}
+
+package() {
+	depends="$depends !sudo"
+	provides="sudo-virt"
+	provider_priority=1
+
+	make install DESTDIR="$pkgdir" PREFIX=/usr
+}
+
+sha512sums="0fa47863490e94884ef07ea8a6180ba5a742832c7110b0ab4da1944e95ab78ee7fcba1e27e4824289341b2fa38e49c0a2be98777de93c33ebf67b035f8a567db"
